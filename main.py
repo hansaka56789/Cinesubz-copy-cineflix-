@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-BASE = "https://cinesubz.co"
+BASE = "https://cinesubz.net"
 IMPERSONATE = "chrome124"   # Chrome 124 browser fingerprint
 
 app = FastAPI(title="CineSubz Unofficial API", version="2.0")
