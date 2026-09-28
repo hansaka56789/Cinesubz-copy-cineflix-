@@ -1,0 +1,34 @@
+name: Run Cinesubz API Live
+
+on:
+  workflow_dispatch: # ඔයා manually Run කරනකොට
+
+jobs:
+  run-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360 # පැය 6
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install cloudflared || true
+          
+      - name: Install cloudflared
+        run: |
+          wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared-linux-amd64.deb
+          
+      - name: Run API with Public Link
+        run: |
+          echo "Starting API..."
+          uvicorn main:app --host 0.0.0.0 --port 8000 &
+          sleep 5
+          echo "Creating public link..."
+          cloudflared tunnel --url http://localhost:8000
