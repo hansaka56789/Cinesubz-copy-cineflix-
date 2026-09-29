@@ -1,12 +1,12 @@
-name: Run Cinesubz API Live
-
+name: Run Cinesubz API Live film and TV series data base 🔥
+#පැය 6k wada
 on:
-  workflow_dispatch: # ඔයා manually Run කරනකොට
+  workflow_dispatch: # 6h
 
 jobs:
   run-api:
     runs-on: ubuntu-latest
-    timeout-minutes: 360 # පැය 6
+    timeout-minutes: 360 # 6h
     steps:
       - uses: actions/checkout@v4
       
